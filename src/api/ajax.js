@@ -8,7 +8,7 @@ export default function ajax(type = 'GET', url, data = {},) {
     let res;
     if (type === "GET") {
       let dataStr = '';
-      Object.keys(data).forEach(key => {
+      Object.keys(data).forEach((key) => {
         dataStr += key + '=' + data[key] + '&'
       })
       if (dataStr !== '') {
@@ -19,7 +19,6 @@ export default function ajax(type = 'GET', url, data = {},) {
     }else{
       res = axios.post(url,data)
     }
-
     res.then((response)=>{
       resolve(response.data)
     }).catch((error)=>{
