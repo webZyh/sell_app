@@ -3,7 +3,7 @@
 * */
 import axios from 'axios'
 
-export default function ajax(type = 'GET', url, data = {},) {
+export default function ajax(url, data={}, type='GET') {
   return new Promise((resolve, reject) => {
     let res;
     if (type === "GET") {
@@ -26,3 +26,4 @@ export default function ajax(type = 'GET', url, data = {},) {
     })
   })
 }
+

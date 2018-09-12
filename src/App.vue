@@ -9,6 +9,9 @@
 <script>
   import RouterTab from 'components/RouterTab/RouterTab'
   export default {
+    mounted(){
+      this.$store.dispatch('getAddress')  
+    },
     components:{
       RouterTab
     }
