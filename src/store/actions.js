@@ -13,24 +13,27 @@ export default {
 	//异步获取地址
 	async getAddress({commit,state}){
 		//发送异步ajax请求
-		const geohash = state.latitude + ',' + state.longitude
+		const geohash = state.latitude + ',' + state.longitude;
+		console.log(geohash);
 		const result = await resAddress(geohash);
+		console.log(result);
+
 		//提交mutation
 		if(result.code === 0){
 			const address = result.data;
 			commit(RECEIVE_ADDRESS,{address})
 		}
-	}
+	},
 	//异步获取食品分类列表
 	async getCategorys({commit}){
 		//发送异步ajax请求
 		const result = await resFoodCategorys()
 		//提交mutation
-		if(result.code === 0){
+		if(result.code===0){
 			const categorys = result.data;
 			commit(RECEIVE_CATEGORYS,{categorys})
 		}
-	}
+	},
 	//异步获取商家列表
 	async getShops({commit,state}){
 		//发送异步ajax请求

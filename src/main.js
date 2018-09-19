@@ -5,7 +5,7 @@ import store from './store'
 
 let vm = new Vue({
   el: '#app',
+  render: h => h(App),
   router,     //组件标签:<router-link>、<router-view>、<keep-alive>	router属性:$route、$router
   store,	//使用上vuex
-  render: h => h(App)
 })
