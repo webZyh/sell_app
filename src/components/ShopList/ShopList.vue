@@ -189,7 +189,13 @@
 </template>
 
 <script>
-    export default {}
+    export default {
+      data () {
+        return {
+          baseImgUrl: 'http://cangdu.org:8001/img/'
+        }
+      },
+    }
 </script>
 
 <style lang="stylus" rel="stylesheet/stylus" scoped>
