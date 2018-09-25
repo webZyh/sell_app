@@ -12,7 +12,7 @@
     </HeaderTop>
     <!--首页导航-->
     <nav class="msite_nav">
-      <div class="swiper-container">
+      <div class="swiper-container"  v-if="categorys.length">
         <div class="swiper-wrapper">
           <div class="swiper-slide" v-for="(categorys,index) in categorysArr" :key="index">
             <a href="javascript:" class="link_to_food" v-for="(category,index) in categorys" :key="index">
@@ -26,6 +26,7 @@
         <!-- Add Pagination -->
         <div class="swiper-pagination"></div>
       </div>
+      <img src="./images/msite_back.svg" alt="back" v-else>
     </nav>
     <ShopList></ShopList>
   </div>
@@ -56,11 +57,11 @@
       //创造自己需要的数据结构，将一个一维数组按要求变成一个二维数组,以方便使用
       categorysArr(){
         const categorys = this.categorys;
-        
+
         const arr = [];
         let minArr = [];
         categorys.forEach((item)=>{
-        
+
           if(minArr.length === 8){
           minArr = []
           }

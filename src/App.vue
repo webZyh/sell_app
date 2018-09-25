@@ -12,7 +12,7 @@
   import {mapActions} from 'vuex'
   export default {
     mounted(){
-      //this.$store.dispatch('getAddress'), 
+      //this.$store.dispatch('getAddress'),
       this.getAddress();  //通知actions的第二种方法
       //this.$store.dispatch('getCategorys'),   //通知actions的第一种方法
       //this.$store.dispatch('getShops')
