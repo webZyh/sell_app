@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <keep-alive>
-      <router-view address="address"></router-view>
+      <router-view></router-view>
     </keep-alive>
     <RouterTab v-show="$route.meta.showFooter"></RouterTab>
   </div>
