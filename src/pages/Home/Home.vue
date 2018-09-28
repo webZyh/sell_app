@@ -75,7 +75,7 @@
     },
     watch:{
       categorys(value){   //categorys数组中有数据了，异步更新界面
-        //界面更新完就立即创建Swiper对象
+        //this.$nextTick(fn):界面更新完就立即创建Swiper对象
         this.$nextTick(()=>{
           new Swiper('.swiper-container', {
             //loop: true,
