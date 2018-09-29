@@ -49,11 +49,13 @@
     },
     mounted() {
 
-      this.$store.dispatch("getCategorys");
+      this.$store.dispatch("getCategorys");    //通知actions
 
     },
     computed:{
-      ...mapState(['address','categorys']),
+      //this.$store.dispatch(['address','categorys']);  //从vuex中读取数据方法1
+      ...mapState(['address','categorys']),   //从vuex中读取数据方法2
+      
       //创造自己需要的数据结构，将一个一维数组按要求变成一个二维数组,以方便使用
       categorysArr(){
         const categorys = this.categorys;

@@ -30,7 +30,7 @@ export default {
 		//提交mutation
 		if(result.code===0){
 			const categorys = result.data;
-			commit(RECEIVE_CATEGORYS,{categorys})
+			commit(RECEIVE_CATEGORYS,{categorys})		//通知mutations
 		}
 	},
 	//异步获取商家列表
