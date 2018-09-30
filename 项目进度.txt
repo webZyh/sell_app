@@ -13,6 +13,7 @@
 		表单前台验证提示
 		
 2018、09、29  video36-41
+2018、09、30  video42-44	
 	前后台交互功能：
 		动态一次性图形验证码、
 		动态一次性短信验证码、
@@ -20,3 +21,15 @@
 		密码登录、
 		获取用户信息，实现自动登录、
 		退出登录
+	mint-ui的使用	
+		1、npm install --save mint-ui
+		2、实现按需打包
+			npm install --save-dev babel-plugin-component
+		3、修改 .babelrc文件
+		4、在main.js中引入组件标签，注册成全局组件标签
+			引入
+				import {Button} from 'mint-ui'
+			注册
+				Vue.component(Button.name , Button)
+			使用
+				<mt-button>标签
