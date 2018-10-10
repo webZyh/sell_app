@@ -21,6 +21,7 @@
 		密码登录、
 		获取用户信息，实现自动登录、
 		退出登录
+		
 	mint-ui的使用	
 		1、npm install --save mint-ui
 		2、实现按需打包

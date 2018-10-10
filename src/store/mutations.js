@@ -6,7 +6,7 @@ import {
 
 export default {
 	[RECEIVE_ADDRESS](state,{address}){
-		state.address = address;		//直接更改state中的数据
+		state.address = address;		//mutation直接更改state中的数据
 	},
 	[RECEIVE_CATEGORYS](state,{categorys}){
 		state.categorys = categorys;

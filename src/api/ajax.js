@@ -28,3 +28,23 @@ export default function ajax(url, data={}, type='GET') {
   })
 }
 
+/*
+<script>
+    var obj = {a:'1',b:'3'};
+    var url = 'www.baidu.com'
+    let dataStr = ''
+    console.log(Object.keys(obj));
+    Object.keys(obj).forEach((key)=>{
+        console.log(key) 
+        dataStr += key + '=' + obj[key] + '&'
+        console.log(dataStr)
+    });
+    var str = 'a=1&b=3&'
+    console.log(str.lastIndexOf('&'));
+    if (dataStr !== '') {
+        dataStr = dataStr.substring(0, dataStr.lastIndexOf('&'))
+        url = url + '?' + dataStr
+    }
+    console.log(url);
+</script>
+*/

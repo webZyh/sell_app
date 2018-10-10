@@ -38,7 +38,7 @@
                   </section>
                   <section class="login_message">
                     <input type="text" maxlength="11" placeholder="验证码" v-model="captcha">
-                    <img class="get_verification" src="./images/captcha.svg" alt="captcha">
+                    <img class="get_verification" src="http://localhost:4000/captcha" alt="captcha" @click="getCaptcha">
                   </section>
                 </section>
               </div>
@@ -59,7 +59,7 @@
     export default {
       data(){
         return{
-          loginWay: true, //为true时表示登录方式为短信登录
+          loginWay: false, //为true时表示登录方式为短信登录
           computedTime: 0, //计时
           flag: false,   //是否正在计时，false表示没有在计时
           phone:'',
@@ -69,7 +69,7 @@
           captcha:'',    
           pwdShow:false,   //是否显示密码,为true表示显示密码
           alertShow: false,   //是否显示弹出框，默认不弹出
-          alertText:''      //弹出的内容
+          alertText:'',      //弹出的内容
         }
       },
       computed:{
@@ -120,6 +120,10 @@
         closeAlert(){
           this.alertText = '';
           this.alertShow = false;
+        },
+        getCaptcha(event){
+          console.log(event.target)
+          event.target.src = 'http://localhost:4000/captcha?time='+Date.now()
         }
       },
       components:{

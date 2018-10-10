@@ -21,7 +21,6 @@
       const geohash = 40.10038 + ',' + 116.36867;
       const result = resAddress(geohash);
       const result2 = await resFoodCategorys();
-      console.log(result2)
     },*/
     methods:{
       ...mapActions(['getAddress'])    //通知actions的第二种方法
