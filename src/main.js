@@ -3,6 +3,10 @@ import App from './App'
 import router from './router'
 import store from './store'
 
+//引入mint-ui
+import {Button} from 'mint-ui'
+Vue.component(Button.name , Button)
+
 let vm = new Vue({
   el: '#app',
   render: h => h(App),
