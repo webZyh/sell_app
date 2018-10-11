@@ -7,7 +7,8 @@ import {
 import {
 	resAddress,
 	resFoodCategorys,
-	resShopsList
+	resShopsList,
+	reqUserInfo
 } from '../api'
 
 export default {
@@ -47,8 +48,19 @@ export default {
 	},
 
 	//手上有数据，就是同步，，没有就从后台获取，就是异步
+	//同步获取用户数据
 	recordUser({commit}, userInfo){
 		commit(RECEIVE_USER_INFO, {userInfo})		//提交到mutation
+	},
+
+	//异步获取用户数据
+	async getUserInfo({commit}){
+		const result = await reqUserInfo();
+		if(result.code === 0){
+			const userInfo = result.data;
+			commit(RECEIVE_USER_INFO, {userInfo})
+		}
 	}
 
+	//退出登录
 }

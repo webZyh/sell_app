@@ -14,6 +14,7 @@
     mounted(){
       //this.$store.dispatch('getAddress'),
       this.getAddress();  //通知actions的第二种方法
+      this.getUserInfo();
       //this.$store.dispatch('getCategorys'),   //通知actions的第一种方法
       //this.$store.dispatch('getShops')
     },
@@ -23,7 +24,7 @@
       const result2 = await resFoodCategorys();
     },*/
     methods:{
-      ...mapActions(['getAddress'])    //通知actions的第二种方法
+      ...mapActions(['getAddress','getUserInfo'])    //通知actions的第二种方法
     },
     components:{
       RouterTab
