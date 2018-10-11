@@ -23,12 +23,16 @@ export const resShopsList = (longitude,latitude)=>ajax(BASE_URL+'/shops',{longit
 export const reqSearchShop = (geohash,keyword)=>ajax(BASE_URL+'search_shops',{geohash,keyword})
 // [5、获取一次性验证码](#5获取一次性验证码)
 // [6、用户名密码登陆](#6用户名密码登陆)
-export const reqPwdLogin = ({name,pwd,captcha})=>ajax(BASE_URL+'login_pwd',{name,pwd,captcha})
+export const reqPwdLogin = ({name,pwd,captcha})=>ajax(BASE_URL+'login_pwd',{name,pwd,captcha},'POST')
+
 // [7、发送短信验证码](#7发送短信验证码)
 export const reqSendCode = (phone)=>ajax(BASE_URL+'sendcode',{phone})
+
 // [8、手机号验证码登陆](#8手机号验证码登陆)
 export const reqSmsLogin = (phone,code)=>ajax(BASE_URL+'login_sms',{phone,code},'POST')
+
 // [9、根据会话获取用户信息](#9根据会话获取用户信息)
 export const reqUserInfo = ()=>ajax(BASE_URL+'userinfo')
+
 // [10、用户登出](#10用户登出)
 export const reqLogout = ()=>ajax(BASE_URL+'logout')

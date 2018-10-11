@@ -19,7 +19,7 @@
     },
     /*async mounted(){
       const geohash = 40.10038 + ',' + 116.36867;
-      const result = resAddress(geohash);
+      const result = resAddress(geohash);   //直接发送请求，不通过actions
       const result2 = await resFoodCategorys();
     },*/
     methods:{

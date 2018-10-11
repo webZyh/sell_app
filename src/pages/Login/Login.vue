@@ -38,7 +38,7 @@
                   </section>
                   <section class="login_message">
                     <input type="text" maxlength="11" placeholder="验证码" v-model="captcha">
-                    <img class="get_verification" src="http://localhost:4000/captcha" alt="captcha" @click="getCaptcha">
+                    <img class="get_verification" src="http://localhost:4000/captcha" alt="captcha" @click="getCaptcha" ref='captcha'>
                   </section>
                 </section>
               </div>
@@ -56,10 +56,13 @@
 
 <script>
   import AlertTip from '../../components/AlertTip/AlertTip'
+
+  //不通过actions发送请求
+  import {reqSendCode,reqPwdLogin,reqSmsLogin} from '../../api'
     export default {
       data(){
         return{
-          loginWay: false, //为true时表示登录方式为短信登录
+          loginWay: true, //为true时表示登录方式为短信登录
           computedTime: 0, //计时
           flag: false,   //是否正在计时，false表示没有在计时
           phone:'',
@@ -78,38 +81,88 @@
         }
       },
       methods:{
-        getCode(){
+        async getCode(){
           //启动倒计时
           if(!this.computedTime){
             //this.flag = true;
             this.computedTime = 30;
-            let timer = setInterval(()=>{
+            this.timer = setInterval(()=>{
               this.computedTime--;
               if(this.computedTime == 0){
-                clearInterval(timer);
+                clearInterval(this.timer);
                 //this.flag = false;
               }
             },1000);
           }
-          //发送ajax请求
+          //发送ajax请求(向指定手机号发送验证码)
+
+          const result = await reqSendCode(this.phone);
+          if(result.code === 1){  //短信验证码发送失败
+            //显示提示
+            this.showAlert(result.msg);
+            //停止计时
+            if(this.computedTime){
+              this.computedTime = 0;
+              //清除定时器
+              clearInterval(this.timer)
+            }
+          }
         },
         //点击登录按钮登录
-        login(){
+        async login(){
+
+          let result;
+
           //前端表单验证
-          if(this.loginWay){  //短信登录
+          if(this.loginWay){  //短信登录方式
+            const {phone,code} = this;
             if(!this.rightPhone){
-              this.showAlert('请输入正确的手机号！')
+              this.showAlert('请输入正确的手机号！');
+              return false;
             }else if(!/\d{6}/.test(this.code)){
-              this.showAlert('验证码必须是6位数字！')
+              this.showAlert('验证码必须是6位数字！');
+              return false;
             }
-          }else{  //账户密码登录
+
+            //发送ajax请求短信登录
+            result = await reqSmsLogin(phone,code)
+            console.log(result)
+
+
+          }else{  //账户密码登录方式
+            const {name,pwd,captcha} = this;
             if(!this.name){
-              this.showAlert('用户名不能为空！')
+              this.showAlert('用户名不能为空！');
+              return false;
             }else if(!this.pwd){
-              this.showAlert('密码不能为空！')
+              this.showAlert('密码不能为空！');
+              return false;
             }else if(!this.captcha){
-              this.showAlert('验证码不能为空！')
+              this.showAlert('验证码不能为空！');
+              return false;
             }
+
+            //发送ajax请求账号密码登录
+            result = await reqPwdLogin({name, pwd, captcha});
+            console.log(result)
+          }
+
+          //统一处理短信登录和账号密码登录的请求结果
+          if(result.code === 0){
+            const user = result.data;
+            //将user的数据保存到vuex的state中
+            this.$store.dispatch('recordUser',user)
+            //成功，跳转到个人中心
+            this.$router.replace('/personal');
+          }else{
+            //失败
+            //弹出提示
+            this.showAlert(result.msg);
+            //刷新图形验证码
+            this.getCaptcha();
+            //清空验证码输入框
+            this.captcha = '';
+            //this.code = '';
           }
         },
         showAlert(alertText){
@@ -122,8 +175,8 @@
           this.alertShow = false;
         },
         getCaptcha(event){
-          console.log(event.target)
-          event.target.src = 'http://localhost:4000/captcha?time='+Date.now()
+          //event.target.src = 'http://localhost:4000/captcha?time='+Date.now()
+          this.$refs.captcha.src = 'http://localhost:4000/captcha?time='+Date.now();
         }
       },
       components:{

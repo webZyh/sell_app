@@ -25,6 +25,9 @@
     top 0
     width 100%
     height 45px
+    a
+      font-size 20px
+      color #fff
     .header_search
       position absolute
       left 15px

@@ -7,6 +7,8 @@ import Order from 'pages/Order/Order'
 import Personal from 'pages/Personal/Personal'
 import Login from 'pages/Login/Login'
 
+import userInfo from 'components/userInfo/userInfo'
+
 Vue.use(VueRouter)
 
 export default new VueRouter({
@@ -18,6 +20,7 @@ export default new VueRouter({
     {path: '/order', component: Order, meta: {showFooter: true}},
     {path: '/personal', component: Personal, meta: {showFooter: true}},
     {path: '/login', component: Login},
+    {path: '/userInfo', component: userInfo},
   ],
   linkActiveClass: 'active'
 })

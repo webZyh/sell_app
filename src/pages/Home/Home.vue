@@ -1,14 +1,17 @@
 <template>
   <div class="home">
     <HeaderTop :title="address.name">
-      <span slot="left" class="header_search">
+      <router-link to="/search" slot="left" class="header_search">
         <i class="iconfont icon-sousuo"></i>
-      </span>
-      <span slot="right" class="header_login">
-        <span class="header_login_text">
+      </router-link>
+      <router-link :to="userInfo._id ? '/userInfo' : '/login'" slot="right" class="header_login">
+        <span class="header_login_text" v-if="!userInfo._id">
           登录|注册
         </span>
-      </span>
+        <span class="header_login_text" v-else>
+          <i class="iconfont icon-person"></i>
+        </span>
+      </router-link>
     </HeaderTop>
     <!--首页导航-->
     <nav class="msite_nav">
@@ -53,8 +56,7 @@
 
     },
     computed:{
-      //this.$store.dispatch(['address','categorys']);  //从vuex中读取数据方法1
-      ...mapState(['address','categorys']),   //从vuex中读取数据方法2
+      ...mapState(['address','categorys','userInfo']),   //从vuex的state中获取数据
       
       //创造自己需要的数据结构，将一个一维数组按要求变成一个二维数组,以方便使用
       categorysArr(){
