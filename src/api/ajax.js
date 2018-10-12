@@ -29,13 +29,14 @@ export default function ajax(url, data={}, type='GET') {
 }
 
 /*
+demo
 <script>
     var obj = {a:'1',b:'3'};
     var url = 'www.baidu.com'
     let dataStr = ''
     console.log(Object.keys(obj));
     Object.keys(obj).forEach((key)=>{
-        console.log(key) 
+        console.log(key)
         dataStr += key + '=' + obj[key] + '&'
         console.log(dataStr)
     });

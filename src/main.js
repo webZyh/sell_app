@@ -3,6 +3,8 @@ import App from './App'
 import router from './router'
 import store from './store'
 
+import './mock/mockServer'    //加载mockServer即可
+
 //引入mint-ui
 import {Button} from 'mint-ui'
 Vue.component(Button.name , Button)

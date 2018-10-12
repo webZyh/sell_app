@@ -126,7 +126,7 @@
 
             //发送ajax请求短信登录
             result = await reqSmsLogin(phone,code)
-            console.log(result)
+            //console.log(result)
 
 
           }else{  //账户密码登录方式
@@ -144,7 +144,7 @@
 
             //发送ajax请求账号密码登录
             result = await reqPwdLogin({name, pwd, captcha});
-            console.log(result)
+            //console.log(result)
           }
 
           //统一处理短信登录和账号密码登录的请求结果

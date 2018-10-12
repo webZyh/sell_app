@@ -1,5 +1,5 @@
-﻿2018、09、25	video23-28
-首页数据(地址、食品分类、商家列表)（获取后台数据）显示、star组件
+﻿首页数据(地址、食品分类、商家列表)（获取后台数据）显示、star组件
+2018、09、25	video23-28
 
 
 登录注册模块
@@ -35,3 +35,35 @@
 				Vue.component(Button.name , Button)
 			使用
 				<mt-button>标签
+
+商家详情组件开发
+2018、10、12	video 45-49
+  1、商家相关组件的创建和路由的搭建
+  2、设计json数据结构
+    ------------
+    json:   结构： 类型/名称    {}/[]  对象和数组的使用情况
+                  {}：里面的数据是无序的，并且数据是不同类型
+                  []：里面的数据是同类型的数据
+            值
+    ------------
+  3、使用mock模拟接口数据（使用Mock.js）
+  4、发送请求，使用vuex管理数据
+
+2018、10、12	video 50
+  1、ShopHeader组件
+    ------------
+    transition动画
+      html：
+        <transition name="fade">
+          //需要动画的标签
+        </transition>
+      css:
+        &.fade-enter-active, &.fade-leave-active
+          transition opacity 0.5s   //指定过渡动画
+        &.fade-enter, &.fade-leave-to
+          opacity 0                 //指定隐藏时的样式
+    ------------
+
+
+
+

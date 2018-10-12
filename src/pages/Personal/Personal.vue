@@ -119,7 +119,7 @@
           this.$store.dispatch('logout');
           Toast('退出成功!');
         },()=>{
-          console.log('点击了取消！');
+          //console.log('点击了取消！');
         });
       }
     },
