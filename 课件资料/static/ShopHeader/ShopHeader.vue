@@ -1,104 +1,130 @@
 <template>
   <div class="shop-header">
     <nav class="shop-nav" :style="{backgroundImage: `url(${shopInfo.bgImg})`}">
-      <a class="back" @click="$router.back()">
+      <a class="back">
         <i class="iconfont icon-arrow_left"></i>
       </a>
     </nav>
     <div class="shop-content">
-      <img class="content-image" :src="shopInfo.avatar">
+      <img class="content-image" src="https://fuss10.elemecdn.com/8/40/02872ce8aefe75c16d3190e75ad61jpeg.jpeg">
       <div class="header-content">
-        <h2 class="content-title" @click="toggleShowShop()">
+        <h2 class="content-title">
           <span class="content-tag">
             <span class="mini-tag">品牌</span>
           </span>
-          <span class="content-name">{{shopInfo.name}}</span>
+          <span class="content-name">大鸭梨</span>
           <i class="content-icon"></i>
         </h2>
         <div class="shop-message">
-          <span class="shop-message-detail">{{shopInfo.score}}</span>
-          <span class="shop-message-detail">月售 {{shopInfo.sellCount}} 单</span>
+          <span class="shop-message-detail">5</span>
+          <span class="shop-message-detail">月售 100 单</span>
           <span class="shop-message-detail">
-          {{shopInfo.description}} <span>约 {{shopInfo.deliveryTime}} 分钟</span>
+          硅谷专送 <span>约 30 分钟</span>
           </span>
-          <span class="shop-message-detail">距离 {{shopInfo.distance}}</span>
+          <span class="shop-message-detail">距离 1000m</span>
         </div>
       </div>
     </div>
-    <div class="shop-header-discounts" v-if="shopInfo.supports">
+    <div class="shop-header-discounts">
       <div class="discounts-left">
-        <div class="activity" :class="supportsNameCls[shopInfo.supports[0].type]">
+        <div class="activity activity-green">
           <span class="content-tag">
-            <span class="mini-tag">{{shopInfo.supports[0].name}}</span>
+            <span class="mini-tag">首单</span>
           </span>
-          <span class="activity-content ellipsis">{{shopInfo.supports[0].content}}</span>
+          <span class="activity-content ellipsis">新用户下单立减 17 元</span>
         </div>
       </div>
-      <div class="discounts-right" @click="toggleShowActivity()">
-        {{shopInfo.supports.length}}个优惠
+      <div class="discounts-right">
+        4 个优惠
       </div>
     </div>
-    <transition name="fade">
-      <div class="shop-brief-modal" v-show="shopShow">
-        <div class="brief-modal-content">
-          <h2 class="content-title">
+    <div class="shop-brief-modal" v-show="shopShow">
+      <div class="brief-modal-content">
+        <h2 class="content-title">
           <span class="content-tag">
             <span class="mini-tag">品牌</span>
           </span>
-            <span class="content-name">{{shopInfo.name}}</span>
-          </h2>
-          <ul class="brief-modal-msg">
-            <li>
-              <h3>{{shopInfo.score}}</h3>
-              <p>评分</p>
-            </li>
-            <li>
-              <h3>{{shopInfo.sellCount}}单</h3>
-              <p>月售</p>
-            </li>
-            <li>
-              <h3>{{shopInfo.description}}</h3>
-              <p>约 {{shopInfo.deliveryTime}} 分钟</p>
-            </li>
-            <li>
-              <h3>{{shopInfo.deliveryPrice}}元</h3>
-              <p>配送费用</p>
-            </li>
-            <li>
-              <h3>{{shopInfo.distance}}</h3>
-              <p>距离</p>
-            </li>
-          </ul>
-          <h3 class="brief-modal-title"><span>公告</span></h3>
-          <div class="brief-modal-notice">
-            {{shopInfo.bulletin}}
-          </div>
-          <div class="mask-footer" @click="toggleShowShop()">
-            <span class="iconfont icon-close"></span>
-          </div>
+          <span class="content-name">嘉禾一品（温都水城）</span>
+        </h2>
+        <ul class="brief-modal-msg">
+          <li>
+            <h3>3.5</h3>
+            <p>评分</p>
+          </li>
+          <li>
+            <h3>90 单</h3>
+            <p>月售</p>
+          </li>
+          <li>
+            <h3>硅谷专送</h3>
+            <p>约 28 分钟</p>
+          </li>
+          <li>
+            <h3>4 元</h3>
+            <p>配送费用</p>
+          </li>
+          <li>
+            <h3>1000m</h3>
+            <p>距离</p>
+          </li>
+        </ul>
+        <h3 class="brief-modal-title"><span>公告</span></h3>
+        <div class="brief-modal-notice">
+          是以粥为特色的中式营养快餐，自 2004 年 10 月 18 日创立“嘉和一品”品牌至今
         </div>
-        <div class="brief-modal-cover"></div>
+        <div class="mask-footer">
+          <span class="iconfont icon-close"></span>
+        </div>
       </div>
-    </transition>
-    <transition name="fade">
-      <div class="activity-sheet" v-show="activityShow">
-        <div class="activity-sheet-content">
-          <h2 class="activity-sheet-title">优惠活动</h2>
-          <ul class="list">
-            <li class="activity-item" v-for="(item,index) in shopInfo.supports" :class="supportsNameCls[item.type]">
+      <div class="brief-modal-cover"></div>
+    </div>
+    <div class="activity-sheet" v-show="activityShow">
+      <div class="activity-sheet-content">
+        <h2 class="activity-sheet-title">优惠活动</h2>
+        <ul class="list">
+          <li class="activity-item activity-green">
             <span class="content-tag">
-              <span class="mini-tag">{{item.name}}</span>
+              <span class="mini-tag">首单</span>
             </span>
-              <span class="activity-content">{{item.content}}</span>
-            </li>
-          </ul>
-          <div class="activity-sheet-close" @click="toggleShowActivity">
-            <span class="iconfont icon-close"></span>
-          </div>
+            <span class="activity-content">新用户下单立减 17 元(不与其它活动同享)</span>
+          </li>
+          <li class="activity-item activity-red">
+            <span class="content-tag">
+              <span class="mini-tag">满减</span>
+            </span>
+            <span class="activity-content">满 35 减 19，满 65 减 35</span>
+          </li>
+          <li class="activity-item activity-orange">
+            <span class="content-tag">
+              <span class="mini-tag">特价</span>
+            </span>
+            <span class="activity-content">【立减 19.5 元】欢乐小食餐</span>
+          </li>
+          <li class="activity-item activity-green">
+            <span class="content-tag">
+              <span class="mini-tag">首单</span>
+            </span>
+            <span class="activity-content">新用户下单立减 17 元(不与其它活动同享)</span>
+          </li>
+          <li class="activity-item activity-red">
+            <span class="content-tag">
+              <span class="mini-tag">满减</span>
+            </span>
+            <span class="activity-content">满 35 减 19，满 65 减 35</span>
+          </li>
+          <li class="activity-item activity-orange">
+            <span class="content-tag">
+              <span class="mini-tag">特价</span>
+            </span>
+            <span class="activity-content">【立减 19.5 元】欢乐小食餐</span>
+          </li>
+        </ul>
+        <div class="activity-sheet-close">
+          <span class="iconfont icon-close"></span>
         </div>
-        <div class="activity-sheet-cover"></div>
       </div>
-    </transition>
+      <div class="activity-sheet-cover"></div>
+    </div>
   </div>
 </template>
 
@@ -108,20 +134,11 @@
     data(){
       return {
         shopShow: false,
-        activityShow: false,
-        supportsNameCls:['activity-green','activity-red','activity-orange']
+        activityShow: false
       }
     },
     computed:{
       ...mapState(['shopInfo'])
-    },
-    methods:{
-      toggleShowShop(){
-        this.shopShow = !this.shopShow;
-      },
-      toggleShowActivity(){
-        this.activityShow = !this.activityShow;
-      }
     }
   }
 </script>
@@ -263,15 +280,6 @@
         .activity
           display flex
           align-items center
-          &.activity-green
-            .content-tag
-              background-color rgb(112, 188, 70)
-          &.activity-red
-            .content-tag
-              background-color rgb(240, 115, 115)
-          &.activity-orange
-            .content-tag
-              background-color: rgb(241, 136, 79)
           .content-tag
             border-radius 1px
             width 25px
@@ -281,7 +289,7 @@
             font-style normal
             font-weight 700
             position relative
-            /*background-color rgb(112, 188, 70)*/
+            background-color rgb(112, 188, 70)
             .mini-tag
               position absolute
               left 0
@@ -431,10 +439,6 @@
       width 100%
       height 100%
       z-index 99
-      &.fade-enter-active,&.fade-leave-active
-        transition opacity 0.5s
-      &.fade-enter,&.fade-leave-to
-        opacity 0
       .activity-sheet-content
         position absolute
         background-color #f5f5f5

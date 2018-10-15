@@ -98,16 +98,7 @@ ew2/1/w/114/h/114">
 </template>
 
 <script>
-    export default {
-      data(){
-        return {
-
-        }
-      },
-      mounted(){
-        this.$store.dispatch('getShopGoods');
-      },
-    }
+    export default {}
 </script>
 
 <style lang="stylus" rel="stylesheet/stylus" scoped>

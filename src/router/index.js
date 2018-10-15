@@ -26,7 +26,7 @@ export default new VueRouter({
     {path: '/personal', component: Personal, meta: {showFooter: true}},
     {path: '/login', component: Login},
     {path: '/userInfo', component: userInfo},     //个人信息中心
-    {path: '/shop', component: Shop, children:[ //子路由
+    {path: '/shop', component: Shop, children:[   //子路由
       {path: '/shop/goods', component: Goods},
       {path: '/shop/info', component: Info},
       {path: '/shop/ratings', component: Ratings},

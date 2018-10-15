@@ -3,7 +3,9 @@ import {
 	RECEIVE_CATEGORYS,
 	RECEIVE_SHOPS,
 	RECEIVE_USER_INFO,
-  CLEAR_USER_INFO
+  CLEAR_USER_INFO,
+  RECEIVE_SHOP_INFO,
+  RECEIVE_SHOP_GOODS
 } from './mutation-types'
 
 export default {
@@ -25,5 +27,13 @@ export default {
 
   [CLEAR_USER_INFO](state){
 	  state.userInfo = {}
+  },
+
+  [RECEIVE_SHOP_INFO](state,{shopInfo}) {
+    state.shopInfo = shopInfo
+  },
+
+  [RECEIVE_SHOP_GOODS](state,{shopGoods}){
+    state.goods = shopGoods
   }
 }

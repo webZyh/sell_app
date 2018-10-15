@@ -3,14 +3,18 @@ import {
 	RECEIVE_CATEGORYS,
 	RECEIVE_SHOPS,
 	RECEIVE_USER_INFO,
-  CLEAR_USER_INFO
+  CLEAR_USER_INFO,
+  RECEIVE_SHOP_INFO,
+  RECEIVE_SHOP_GOODS
 } from './mutation-types'
 import {
 	resAddress,
 	resFoodCategorys,
 	resShopsList,
 	reqUserInfo,
-  reqLogout
+  reqLogout,
+  reqInfo,
+  reqGoods
 } from '../api'
 
 export default {
@@ -68,7 +72,26 @@ export default {
   async logout({commit}){
     const result = await reqLogout();
     if (result.code === 0){
-      commit(CLEAR_USER_INFO)
+      commit(CLEAR_USER_INFO)   //清空用户信息
+    }
+  },
+
+  //异步获取商家信息
+  async getShopInfo({commit}){
+	  const result = await reqInfo();
+    if(result.code === 0){
+      const shopInfo = result.data;
+      commit(RECEIVE_SHOP_INFO, {shopInfo});
+    }
+  },
+
+  //异步获取商家食品分类
+  async getShopGoods({commit}){
+	  const result = await reqGoods();
+	  if(result.code ===0 ){
+	    const shopGoods = result.data;
+      console.log(shopGoods);
+      commit(RECEIVE_SHOP_GOODS,{shopGoods})
     }
   }
 }

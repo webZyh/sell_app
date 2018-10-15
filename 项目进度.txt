@@ -50,7 +50,7 @@
   4、发送请求，使用vuex管理数据
 
 2018、10、12	video 50
-  1、ShopHeader组件
+  ShopHeader组件
     ------------
     transition动画
       html：
@@ -63,7 +63,29 @@
         &.fade-enter, &.fade-leave-to
           opacity 0                 //指定隐藏时的样式
     ------------
+2018-10-15  code  45-50
+2018-10-15  video 51-59
+  Goods组件
+  菜单和内容的关联滑动功能：better-scroll
+    相关内容
+      currentIndex：计算属性，表示当前应该显示的菜单索引
+      scrollY：右侧滑动的Y轴坐标
+      tops：所有右侧分类li的top组成的数组
+      tip：1、在滑动过程中，实时收集scrollY
+          2、列表第一次显示后，收集tops
+              Array.prototype.slice.call(): 能将具有length属性的对象转成数组
+          3、实现currentIndex的计算属性
 
+    better-scroll的用法
+        1、实现列表的滑动
+          on('scroll',()=>{})
+        2、实现menu的点击效果
+          clickMenuItem()
+
+
+  CartControl组件
+  ShopCart组件
+  Food组件
 
 
 
