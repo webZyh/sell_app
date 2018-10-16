@@ -5,7 +5,9 @@ import {
 	RECEIVE_USER_INFO,
   CLEAR_USER_INFO,
   RECEIVE_SHOP_INFO,
-  RECEIVE_SHOP_GOODS
+  RECEIVE_SHOP_GOODS,
+  INCREMENT_FOOD_COUNT,
+  DECREMENT_FOOD_COUNT
 } from './mutation-types'
 import {
 	resAddress,
@@ -94,6 +96,15 @@ export default {
       commit(RECEIVE_SHOP_GOODS,{shopGoods})
       //数据更新了，通知一下组件
       callback && callback()
+    }
+  },
+
+  //同步获取food的count值
+  foodCount({commit},{isTrue,food}){
+	  if (isTrue){  //点击了增加
+      commit(INCREMENT_FOOD_COUNT,{food})
+    }else{  //点击了减少
+      commit(DECREMENT_FOOD_COUNT,{food})
     }
   }
 }

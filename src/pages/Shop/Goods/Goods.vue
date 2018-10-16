@@ -34,7 +34,7 @@
                 </div>
                 <!--CartControl组件-->
                 <div class="cartcontrol-wrapper">
-                  CartControl
+                  <CartControl :food="food"></CartControl>
                 </div>
               </div>
             </li>
@@ -48,6 +48,7 @@
 <script>
   import {mapState} from 'vuex'
   import BScroll from 'better-scroll'
+  import CartControl from '../../../components/CartControl/CartControl.vue'
 
   export default {
     data() {
@@ -99,7 +100,8 @@
         });
         //右边食品分类栏
         this.foodsScroll = new BScroll('.foods-wrapper', {
-          probeType: 2
+          probeType: 2,
+          click:true
         });
         //实时统计y轴的滚动距离：scrollY
         this.foodsScroll.on('scroll', (pos) => {
@@ -128,6 +130,9 @@
         this.scrollY = scrollY;
         this.foodsScroll.scrollTo(0, -scrollY, 300);
       }
+    },
+    components:{
+      CartControl
     }
   }
 </script>
