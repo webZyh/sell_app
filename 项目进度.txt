@@ -1,7 +1,6 @@
 ﻿首页数据(地址、食品分类、商家列表)（获取后台数据）显示、star组件
 2018、09、25	video23-28
 
-
 登录注册模块
 2018、09、26	video29-34
 2018、09/28、29  code
@@ -38,7 +37,7 @@
 
 商家详情组件开发
 2018、10、12	video 45-49
-  1、商家相关组件的创建和路由的搭建
+  1、商家相关组件的创建和路由的搭建：Goods、Ratings、Info、shopHeader组件
   2、设计json数据结构
     ------------
     json:   结构： 类型/名称    {}/[]  对象和数组的使用情况
@@ -71,6 +70,7 @@
       currentIndex：计算属性，表示当前应该显示的菜单索引
       scrollY：右侧滑动的Y轴坐标
       tops：所有右侧分类li的top组成的数组
+
       tip：1、在滑动过程中，实时收集scrollY
           2、列表第一次显示后，收集tops
               Array.prototype.slice.call(): 能将具有length属性的对象转成数组
@@ -79,13 +79,17 @@
     better-scroll的用法
         1、实现列表的滑动
           on('scroll',()=>{})
-        2、实现menu的点击效果
+    实现menu的点击效果
           clickMenuItem()
+2018-10-16  code  51-59
 
-
+2018-10-16  video   60-67
   CartControl组件
-  ShopCart组件
   Food组件
+  ShopCart组件
+    购物车显示的数据数组  cartFoods:[]
+
+
 
 
 

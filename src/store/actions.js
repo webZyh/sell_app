@@ -86,12 +86,14 @@ export default {
   },
 
   //异步获取商家食品分类
-  async getShopGoods({commit}){
+  async getShopGoods({commit},callback){
 	  const result = await reqGoods();
 	  if(result.code ===0 ){
 	    const shopGoods = result.data;
-      console.log(shopGoods);
+      //console.log(shopGoods);
       commit(RECEIVE_SHOP_GOODS,{shopGoods})
+      //数据更新了，通知一下组件
+      callback && callback()
     }
   }
 }
