@@ -7,7 +7,8 @@ import {
   RECEIVE_SHOP_INFO,
   RECEIVE_SHOP_GOODS,
   INCREMENT_FOOD_COUNT,
-  DECREMENT_FOOD_COUNT
+  DECREMENT_FOOD_COUNT,
+  CLEAR_CART_FOODS
 } from './mutation-types'
 import {
 	resAddress,
@@ -106,5 +107,10 @@ export default {
     }else{  //点击了减少
       commit(DECREMENT_FOOD_COUNT,{food})
     }
+  },
+
+  //同步清除cartFoods
+  clearCartFoods({commit}){
+	  commit(CLEAR_CART_FOODS);
   }
 }

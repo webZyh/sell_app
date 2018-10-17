@@ -1,47 +1,51 @@
 <template>
-  <div class="goods">
-    <div class="menu-wrapper">
-      <ul>
-        <li class="menu-item " v-for="(good,index) in goods" :key="index" :class="{current: index === currentIndex}"
-            @click="clickMenuItem(index)">
+  <div>
+    <div class="goods">
+      <div class="menu-wrapper">
+        <ul>
+          <li class="menu-item " v-for="(good,index) in goods" :key="index" :class="{current: index === currentIndex}"
+              @click="clickMenuItem(index)">
           <span class="text bottom-border-1px">
           <img class="icon"
                :src="good.icon" v-if="good.icon">
           {{good.name}}
           </span>
-        </li>
-      </ul>
-    </div>
-    <div class="foods-wrapper">
-      <ul ref="category">
-        <li class="food-list-hook" v-for="(good,index) in goods" :key="index">
-          <h1 class="title">{{good.name}}</h1>
-          <ul>
-            <li class="food-item bottom-border-1px" v-for="(food,index) in good.foods" :key="index">
-              <div class="icon">
-                <img width="57" height="57"
-                     :src="food.icon">
-              </div>
-              <div class="content">
-                <h2 class="name">{{food.name}}</h2>
-                <p class="desc" v-if="food.description">{{food.description}}</p>
-                <div class="extra">
-                  <span class="count">月售 {{food.sellCount}} 份</span>
-                  <span>好评率 {{food.rating}}%</span></div>
-                <div class="price">
-                  <span class="now">￥{{food.price}}</span>
-                  <span class="old" v-if="food.oldPrice">￥{{food.oldPrice}}</span>
+          </li>
+        </ul>
+      </div>
+      <div class="foods-wrapper">
+        <ul ref="category">
+          <li class="food-list-hook" v-for="(good,index) in goods" :key="index">
+            <h1 class="title">{{good.name}}</h1>
+            <ul>
+              <li class="food-item bottom-border-1px" v-for="(food,index) in good.foods" :key="index" @click="showSeletedFood(food)">
+                <div class="icon">
+                  <img width="57" height="57"
+                       :src="food.icon">
                 </div>
-                <!--CartControl组件-->
-                <div class="cartcontrol-wrapper">
-                  <CartControl :food="food"></CartControl>
+                <div class="content">
+                  <h2 class="name">{{food.name}}</h2>
+                  <p class="desc" v-if="food.description">{{food.description}}</p>
+                  <div class="extra">
+                    <span class="count">月售 {{food.sellCount}} 份</span>
+                    <span>好评率 {{food.rating}}%</span></div>
+                  <div class="price">
+                    <span class="now">￥{{food.price}}</span>
+                    <span class="old" v-if="food.oldPrice">￥{{food.oldPrice}}</span>
+                  </div>
+                  <!--CartControl组件-->
+                  <div class="cartcontrol-wrapper">
+                    <CartControl :food="food"></CartControl>
+                  </div>
                 </div>
-              </div>
-            </li>
-          </ul>
-        </li>
-      </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+      <Food :food="food"  ref="foodTag"></Food>
     </div>
+    <ShopCart :shopInfo="shopInfo"></ShopCart>
   </div>
 </template>
 
@@ -49,12 +53,15 @@
   import {mapState} from 'vuex'
   import BScroll from 'better-scroll'
   import CartControl from '../../../components/CartControl/CartControl.vue'
+  import Food from '../../../components/Food/Food.vue'
+  import ShopCart from '../../../components/ShopCart/ShopCart.vue'
 
   export default {
     data() {
       return {
         scrollY: 0,   //右侧滑动的Y轴坐标
-        tops: []       //所有右侧分类li的top组成的数组
+        tops: [],       //所有右侧分类li的top组成的数组
+        food:{}       //当前点击要查看的食品
       }
     },
     mounted() {
@@ -67,7 +74,7 @@
       });
     },
     computed: {
-      ...mapState(['goods']),
+      ...mapState(['goods','shopInfo']),
       //表示当前应该显示的菜单索引
       currentIndex() {
         const {scrollY, tops} = this;
@@ -129,10 +136,18 @@
         //点击后，立即更新scrollY，立即改变当前菜单的样式
         this.scrollY = scrollY;
         this.foodsScroll.scrollTo(0, -scrollY, 300);
+      },
+
+      //选择查看某一种食品
+      showSeletedFood(food){
+        this.food = food;
+        this.$refs.foodTag.toggleShowFood();
       }
     },
     components:{
-      CartControl
+      CartControl,
+      Food,
+      ShopCart
     }
   }
 </script>

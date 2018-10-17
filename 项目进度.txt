@@ -84,10 +84,15 @@
 2018-10-16  code  51-59
 
 2018-10-16  video   60-67
+2018-10-16  code
   CartControl组件
+
+2018-10-17  code
   Food组件
   ShopCart组件
-    购物车显示的数据数组  cartFoods:[]
+    添加到购物车的食品的数据数组  cartFoods:[]
+
+2018-10-18
 
 
 

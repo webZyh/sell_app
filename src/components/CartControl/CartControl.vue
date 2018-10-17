@@ -1,10 +1,10 @@
 <template>
   <div class="cartcontrol">
     <transition name="move">
-      <div class="iconfont icon-remove_circle_outline" v-if="food.count" @click="foodCount(false)"></div>
+      <div class="iconfont icon-remove_circle_outline" v-if="food.count" @click.stop="updateFoodCount(false)"></div>
     </transition>
     <div class="cart-count" v-if="food.count">{{food.count}}</div>
-    <div class="iconfont icon-add_circle" @click="foodCount(true)"></div>
+    <div class="iconfont icon-add_circle" @click.stop="updateFoodCount(true)"></div>
   </div>
 </template>
 
@@ -16,7 +16,7 @@
       }
     },
     methods:{
-      foodCount(isTrue){
+      updateFoodCount(isTrue){
         const {food} = this;
         //true表示点击增加按钮，false表示点击了减少按钮
         //使用vuex管理food的count状态
