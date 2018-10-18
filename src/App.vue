@@ -1,3 +1,4 @@
+<link rel="stylesheet" href="../../../../study_video/尚硅谷Vue硅谷外卖项目视频/code/gshop-client_pages/css/reset.css">
 <template>
   <div id="app">
     <keep-alive>
