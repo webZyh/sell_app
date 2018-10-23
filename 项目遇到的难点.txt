@@ -36,3 +36,33 @@ categorys(value){   //categorys数组中有数据了，异步更新界面
   3、点击子组件中的按钮，改变父组件中的状态，使用 分发自定义事件(事件名: closeTip)
      this.$emit('closeTip')
      父组件使用@closeTip='method()' 接收,在method()方法中处理后续操作
+
+8、better-scroll何时new：
+  待数据加载且渲染完成后new
+  在调用actios时传入一个回调函数，在actions中待数据请求完成后，使用回调函数
+  this.$store.dispatch('getRatings',()=>{
+  同时使用this.$nextTick(()=>{
+            new BScroll(this.$refs.xxx,{
+              click:true,
+            });
+          })
+  }）
+  async getRatings({commit},callback){
+    const result = await reqRatings();
+    if(result.code === 0){
+      const ratings = result.data;
+      commit(RECEIVE_SHOP_RATINGS,{ratings})
+      callback && callback();
+    }
+  }
+
+9、评论筛选逻辑分析
+    条件1:
+        selectType: 0/1/2
+        rateType: 0/1
+        selectType===2 || selectType===rateType
+    条件2
+        onlyShowText: true/false
+        text: 有值/没值
+        !onlyShowText || text.length>0
+

@@ -8,7 +8,9 @@ import {
   RECEIVE_SHOP_GOODS,
   INCREMENT_FOOD_COUNT,
   DECREMENT_FOOD_COUNT,
-  CLEAR_CART_FOODS
+  CLEAR_CART_FOODS,
+  RECEIVE_SHOP_RATINGS,
+  RECEIVE_SEARCH_SHOPS
 } from './mutation-types'
 import {
 	resAddress,
@@ -17,7 +19,9 @@ import {
 	reqUserInfo,
   reqLogout,
   reqInfo,
-  reqGoods
+  reqGoods,
+  reqRatings,
+  reqSearchShop
 } from '../api'
 
 export default {
@@ -112,5 +116,26 @@ export default {
   //同步清除cartFoods
   clearCartFoods({commit}){
 	  commit(CLEAR_CART_FOODS);
+  },
+
+  //异步获取商家评论
+  async getRatings({commit},callback){
+	  const result = await reqRatings();
+	  if(result.code === 0){
+	    const ratings = result.data;
+	    commit(RECEIVE_SHOP_RATINGS,{ratings})
+      callback && callback();
+    }
+  },
+
+  //异步搜索商家
+  async searchShops({commit,state},keyword){
+    let geohash = state.latitude + ',' + state.longitude;
+    const result = await reqSearchShop(geohash,keyword);
+    if (result.code === 0){
+      console.log(result);
+      let searchShops = result.data;
+      commit(RECEIVE_SEARCH_SHOPS,{searchShops})
+    }
   }
 }

@@ -8,7 +8,9 @@ import {
   RECEIVE_SHOP_GOODS,
   INCREMENT_FOOD_COUNT,
   DECREMENT_FOOD_COUNT,
-  CLEAR_CART_FOODS
+  CLEAR_CART_FOODS,
+  RECEIVE_SHOP_RATINGS,
+  RECEIVE_SEARCH_SHOPS
 } from './mutation-types'
 import Vue from 'vue'
 
@@ -67,5 +69,15 @@ export default {
     });
     //清空购物车中的food
     state.cartFoods = [];
+  },
+
+  //商家评论
+  [RECEIVE_SHOP_RATINGS](state,{ratings}){
+	  state.ratings = ratings;
+  },
+
+  //搜索商家
+  [RECEIVE_SEARCH_SHOPS](state,{searchShops}){
+	  state.searchShops = searchShops;
   }
 }

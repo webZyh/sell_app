@@ -3,66 +3,84 @@
     <div class="ratings-content">
       <div class="overview">
         <div class="overview-left">
-          <h1 class="score">{{shopInfo.score}}</h1>
+          <h1 class="score">4.7</h1>
           <div class="title">综合评分</div>
-          <div class="rank">高于周边商家 {{shopInfo.rankRate}}%</div>
+          <div class="rank">高于周边商家 99%</div>
         </div>
         <div class="overview-right">
           <div class="score-wrapper">
             <span class="title">服务态度</span>
-            <Star :score="shopInfo.serviceScore" :size="36"/>
-            <span class="score">{{shopInfo.serviceScore}}</span>
+            <Star :score="4.6" :size="36" />
+            <span class="score">4.6</span>
           </div>
           <div class="score-wrapper">
             <span class="title">商品评分</span>
-            <Star :score="shopInfo.foodScore" :size="36"/>
-            <span class="score">{{shopInfo.foodScore}}</span>
+            <Star :score="4.7" :size="36" />
+            <span class="score">4.7</span>
           </div>
           <div class="delivery-wrapper">
             <span class="title">送达时间</span>
-            <span class="delivery">{{shopInfo.deliveryTime}} 分钟</span>
+            <span class="delivery">30 分钟</span>
           </div>
         </div>
       </div>
       <div class="split"></div>
       <div class="ratingselect">
         <div class="rating-type border-1px">
-          <span class="block positive" :class="{active: selectType===2}" @click="selectType=2">
-            全部<span class="count">{{ratings.length}}</span>
+          <span class="block positive active">
+            全部<span class="count">30</span>
           </span>
-          <span class="block positive" :class="{active: selectType===0}" @click="selectType=0">
-            满意<span class="count">{{positiveCount}}</span>
+          <span class="block positive">
+            满意<span class="count">28</span>
           </span>
-          <span class="block negative" :class="{active: selectType===1}" @click="selectType=1">
-            不满意<span class="count">{{ratings.length-positiveCount}}</span>
+          <span class="block negative">
+            不满意<span class="count">2</span>
           </span>
         </div>
-        <div class="switch" :class="{on: onlyShowContent}" @click='onlyShowContent=!onlyShowContent'>
+        <div class="switch on">
           <span class="iconfont icon-check_circle"></span>
           <span class="text">只看有内容的评价</span>
         </div>
       </div>
-      <div class="rating-wrapper" ref="ratings">
+      <div class="rating-wrapper">
         <ul>
-          <li class="rating-item" v-for="(rating,index) in filterRatings " :key="index">
+          <li class="rating-item">
             <div class="avatar">
               <img width="28" height="28"
-                   :src="rating.avatar">
+                   src="http://static.galileo.xiaojukeji.com/static/tms/default_header.png">
             </div>
             <div class="content">
-              <h1 class="name">{{rating.username}}</h1>
+              <h1 class="name">aa</h1>
               <div class="star-wrapper">
-                <Star :score="rating.score" :size="24"/>
-                <span class="delivery" v-if="rating.deliveryTime">{{rating.deliveryTime}}</span>
+                <Star :score="5" :size="24" />
+                <span class="delivery">30</span>
               </div>
-              <p class="text">{{rating.text}}</p>
+              <p class="text">不错</p>
               <div class="recommend">
-                <span class="iconfont" :class="rating.rateType===0?'icon-thumb_up':'icon-thumb_down'"></span>
-                <span class="item" v-for="(item,index) in rating.recommend" :key="index">{{item}}</span>
-                <!--<span class="item">皮蛋瘦肉粥</span>
-                <span class="item">扁豆焖面</span>-->
+                <span class="iconfont icon-thumb_up"></span>
+                <span class="item">南瓜粥</span>
+                <span class="item">皮蛋瘦肉粥</span>
+                <span class="item">扁豆焖面</span>
               </div>
-              <div class="time">{{rating.rateTime}}</div>
+              <div class="time">2016-07-23 21:52:44</div>
+            </div>
+          </li>
+          <li class="rating-item">
+            <div class="avatar">
+              <img width="28" height="28"
+                   src="http://static.galileo.xiaojukeji.com/static/tms/default_header.png">
+            </div>
+            <div class="content">
+              <h1 class="name">aa</h1>
+              <div class="star-wrapper">
+                <Star :score="4" :size="24" />
+                <span class="delivery">30</span>
+              </div>
+              <p class="text">不错</p>
+              <div class="recommend">
+                <span class="iconfont icon-thumb_down"></span>
+              </div>
+              <div class="time">2016-07-23 21:52:44</div>
             </div>
           </li>
         </ul>
@@ -72,56 +90,7 @@
 </template>
 
 <script>
-  import Star from '../../../components/Star/Star'
-  import BScroll from 'better-scroll'
-  import {mapState, mapGetters} from 'vuex'
-
-  export default {
-    data() {
-      return {
-        selectType: 2, //2表示全部， 0 表示满意，  1表示不满意
-        onlyShowContent: false   //true表示只看有内容的评论
-      }
-    },
-    mounted() {
-      this.$store.dispatch('getRatings', () => {
-        this.$nextTick(() => {
-          new BScroll(this.$refs.ratings, {
-            click: true,
-          });
-        })
-      })
-
-    },
-    methods: {
-
-    },
-    computed: {
-      ...mapState(['shopInfo', 'ratings']),
-      ...mapGetters(['positiveCount']),
-      //通过过滤条件产生一个新的数组
-      filterRatings(){
-        const {ratings,selectType,onlyShowContent} = this
-        return ratings.filter((rating)=>{
-          const {rateType,text} = rating
-          /*
-            条件1:
-                selectType: 0/1/2
-                rateType: 0/1
-                selectType===2 || selectType===rateType
-            条件2
-                onlyShowText: true/false
-                text: 有值/没值
-                !onlyShowText || text.length>0
-           */
-          return (selectType===2 || selectType===rateType)&& (!onlyShowContent || text.length>0);
-        })
-      }
-    },
-    components: {
-      Star
-    }
-  }
+    export default {}
 </script>
 
 <style lang="stylus" rel="stylesheet/stylus">
@@ -261,7 +230,6 @@
             font-size: 10px
             color: rgb(7, 17, 27)
           .star-wrapper
-            height 10px
             margin-bottom: 6px
             font-size: 0
             .star
