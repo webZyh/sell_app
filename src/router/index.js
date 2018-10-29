@@ -1,11 +1,18 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 
-import Home from 'pages/Home/Home'
-import Search from 'pages/Search/Search'
-import Order from 'pages/Order/Order'
-import Personal from 'pages/Personal/Personal'
-import Login from 'pages/Login/Login'
+// import Home from 'pages/Home/Home'
+// import Search from 'pages/Search/Search'
+// import Order from 'pages/Order/Order'
+// import Personal from 'pages/Personal/Personal'
+// import Login from 'pages/Login/Login'
+
+//实现路由组件懒加载
+const Home = ()=> import('pages/Home/Home')
+const Search = ()=> import('pages/Search/Search')
+const Order = ()=> import('pages/Order/Order')
+const Personal = ()=> import('pages/Personal/Personal')
+const Login = ()=> import('pages/Login/Login')
 
 import userInfo from 'pages/userInfo/userInfo'
 

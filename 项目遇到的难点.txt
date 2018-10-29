@@ -66,3 +66,7 @@ categorys(value){   //categorys数组中有数据了，异步更新界面
         text: 有值/没值
         !onlyShowText || text.length>0
 
+
+10、使用vue-lazyload时，用v-lazy代替:src后，动态绑定的图片不会更换
+  解决办法：增加一个:key，完美解决
+    <img v-lazy="food.image" :key="food.image">

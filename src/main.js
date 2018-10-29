@@ -5,10 +5,18 @@ import router from './router'
 import store from './store'
 
 import './mock/mockServer'    //加载mockServer即可
+import './filter'
 
 //引入mint-ui
 import {Button} from 'mint-ui'
 Vue.component(Button.name , Button)
+
+//VueLazyload
+import VueLazyload from 'vue-lazyload'
+import loading from './common/imgs/loading.gif'
+Vue.use(VueLazyload,{
+  loading
+});
 
 let vm = new Vue({
   el: '#app',

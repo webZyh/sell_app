@@ -105,7 +105,14 @@
   shopInfo组件
   search组件
 
-2018-10-24  video   78-82
+2018-10-29  video、code  78-82
+缓存路由组件对象
+路由组件懒加载
+vue-lazyload
+moment实现日期过滤器/date-fns
+  Vue.filter()
+
+npm run build --report
 
 
 
