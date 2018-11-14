@@ -12,7 +12,7 @@
           <div class="price highlight">￥{{totalPrice}}</div>
           <div class="desc">另需配送费￥{{shopInfo.deliveryPrice}} 元</div>
         </div>
-        <div class="content-right">
+        <div class="content-right" @click="settlement">
           <div class="pay" :class="payClass">
             {{deliveryStatus}}
           </div>
@@ -58,7 +58,7 @@
       shopInfo: Object,
     },
     computed: {
-      ...mapState(['cartFoods']),
+      ...mapState(['cartFoods','userInfo']),
       ...mapGetters(['totalCount', 'totalPrice']),
       deliveryStatus() {   //配送状态
         const {totalPrice} = this;
@@ -116,6 +116,17 @@
         },()=>{
 
         });
+      },
+      //结算
+      settlement(){
+        const {userInfo} = this;
+        if(!userInfo._id){
+          MessageBox.confirm('您未登录，是否登录？').then(()=>{
+
+          },()=>{})
+        }else{
+          console.log('支付');
+        }
       }
     },
     components: {

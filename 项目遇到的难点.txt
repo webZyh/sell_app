@@ -36,6 +36,10 @@ categorys(value){   //categorys数组中有数据了，异步更新界面
   3、点击子组件中的按钮，改变父组件中的状态，使用 分发自定义事件(事件名: closeTip)
      this.$emit('closeTip')
      父组件使用@closeTip='method()' 接收,在method()方法中处理后续操作
+  4、同级子组件传参：
+    a、创建一个中央事件总线，子组件1和子组件2都要引入这个总线，import bus from 'assets/eventBus'
+    b、子组件1中使用bus.$emit('eventName','需要传递的数据');
+    c、子组件2中使用bus.$on('eventName',function(msg){}),接收这个参数数据并做相应处理
 
 8、better-scroll何时new：
   待数据加载且渲染完成后new

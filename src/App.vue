@@ -14,7 +14,7 @@
     mounted(){
       //this.$store.dispatch('getAddress'),
       this.getAddress();  //通知actions的第二种方法
-      this.getUserInfo();
+      this.getUserInfo(); //自动获取用户信息的请求，相当于登录信息的保存在后台，保存时间为一天
       //this.$store.dispatch('getCategorys'),   //通知actions的第一种方法
       //this.$store.dispatch('getShops')
     },
