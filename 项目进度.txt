@@ -112,6 +112,7 @@ vue-lazyload
 moment实现日期过滤器/date-fns
   Vue.filter()
 
+启用打包可视化工具：
 npm run build --report
 
 
